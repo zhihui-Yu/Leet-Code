@@ -1,3 +1,5 @@
+package easy;
+
 /**
  * @author simple
  */
