@@ -1,3 +1,5 @@
+package easy;
+
 /**
  * @author simple
  * 给你一个整数数组 nums 。
