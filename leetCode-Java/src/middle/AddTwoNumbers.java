@@ -23,6 +23,7 @@ package middle;
  */
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // 尾插法 + 进位制
         ListNode head = null;
         ListNode tail = null;
         int carry = 0;
@@ -33,6 +34,8 @@ public class AddTwoNumbers {
             sum = val1 + val2 + carry;
             carry = sum / 10;
             sum = sum % 10;
+
+            // 尾插node， val -> 链表相应位置的和的余数
             if (head == null) {
                 head = tail = new ListNode(sum);
             } else {
@@ -46,6 +49,7 @@ public class AddTwoNumbers {
                 l2 = l2.next;
             }
         }
+        // 如果最后还有进位 则多加一个node在尾部
         if (carry > 0) {
             tail.next = new ListNode(carry);
         }
