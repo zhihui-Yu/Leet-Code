@@ -42,7 +42,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
             char alpha = s.charAt(end);
             // 如果map中有重复的字符，则窗口的 start 需要重新定义
             if (map.containsKey(alpha)) {
-                // start = MAX (重复值的下标 + 1 , 当前start)
+                // start = MAX (以前重复值的下标 + 1 , 当前start)
                 start = Math.max(map.get(alpha), start);
             }
             // 最大不重复的字符串长度 窗口的大小(从零开始 所以加一)
