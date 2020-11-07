@@ -32,21 +32,24 @@ import java.util.Map;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
-        int res = 0;
+        // 滑动窗口法
+        int maxCount = 0;
         int len = s.length();
+        // 利用map 存储 key -> 字符， val -> 下标 + 1 (start)
         Map<Character, Integer> map = new HashMap<>();
+        // 定义窗口初始值。
         for (int start = 0, end = 0; end < len; end++) {
-            char c = s.charAt(end);
-            if (map.containsKey(c)) {
-                start = Math.max(map.get(c), start);
+            char alpha = s.charAt(end);
+            // 如果map中有重复的字符，则窗口的 start 需要重新定义
+            if (map.containsKey(alpha)) {
+                // start = MAX (重复值的下标 + 1 , 当前start)
+                start = Math.max(map.get(alpha), start);
             }
-            res = Math.max(res, end - start + 1);
-            map.put(c, end + 1);
+            // 最大不重复的字符串长度 窗口的大小(从零开始 所以加一)
+            maxCount = Math.max(maxCount, end - start + 1);
+            // 将字符存到map
+            map.put(alpha, end + 1);
         }
-        return res;
-    }
-
-    public static void main(String[] args) {
-        new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring("abba");
+        return maxCount;
     }
 }
