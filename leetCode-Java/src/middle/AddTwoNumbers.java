@@ -14,26 +14,70 @@ package middle;
  * 输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
  * 输出：7 -> 0 -> 8
  * 原因：342 + 465 = 807
+ *
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/add-two-numbers
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
  */
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        int l1Number = 0;
-        int l2Number = 0;
-        int i = 1;
-        while (l1.next != null) {
+        ListNode head = null;
+        ListNode tail = null;
+        int carry = 0;
+        int sum;
+        while (l1 != null || l2 != null) {
+            int val1 = l1 == null ? 0 : l1.val;
+            int val2 = l2 == null ? 0 : l2.val;
+            sum = val1 + val2 + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            if (head == null) {
+                head = tail = new ListNode(sum);
+            } else {
+                tail.next = new ListNode(sum);
+                tail = tail.next;
+            }
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry > 0) {
+            tail.next = new ListNode(carry);
+        }
+        return head;
+    }
+
+    // 用于long 长度 > 链表的长度
+    public ListNode addTwoNumbersV1(ListNode l1, ListNode l2) {
+        long l1Number = 0;
+        long l2Number = 0;
+        long i = 1;
+        while (l1 != null) {
             l1Number += i * l1.val;
             l1 = l1.next;
             i = i * 10;
         }
         i = 1;
-        while (l2.next != null) {
+        while (l2 != null) {
             l2Number += i * l2.val;
             l2 = l2.next;
             i = i * 10;
         }
-        int count = l1Number + l2Number;
-        ListNode res = new ListNode();
-        return null;
+        long count = l1Number + l2Number;
+        ListNode res = null;
+        String num = String.valueOf(count);
+        for (int j = 0; j < num.length(); j++) {
+            ListNode head = new ListNode();
+            head.next = res;
+            head.val = num.charAt(j) - 48;
+            res = head;
+        }
+        return res;
     }
 
     static class ListNode {
