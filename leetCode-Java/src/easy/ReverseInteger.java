@@ -45,9 +45,12 @@ public class ReverseInteger {
     public int reverseV1(int x) {
         long ans = 0;
         while (x != 0) {
+            // ans = 当前值进一位 + 当前 x的个位数
             ans = ans * 10 + x % 10;
+            // x 向右移一位
             x /= 10;
         }
+        // 如果 long 转 int 值不等 则说明越界了。
         return (int) ans == ans ? (int) ans : 0;
     }
 }
