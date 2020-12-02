@@ -42,6 +42,8 @@ import java.util.Optional;
  */
 public class SplitAStringInBalancedStrings {
     public int balancedStringSplit(String s) {
+        // 遇到 'L' balance++, 'R' balance--. 有点类似栈
+        // 当 balance = 0 时，说明可以切割一次。
         int resCount = 0;
         int balance = 0;
         for (int i = 0; i < s.length(); i++) {
