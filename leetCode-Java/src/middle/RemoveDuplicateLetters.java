@@ -30,29 +30,37 @@ package middle;
  */
 public class RemoveDuplicateLetters {
     public String removeDuplicateLetters(String s) {
-        boolean[] vis = new boolean[26];
-        int[] num = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            num[s.charAt(i) - 'a']++;
+        // 统计 字符串中相同字符数量
+        int[] numBucket = new int[26];
+        for (char i : s.toCharArray()) {
+            numBucket[i - 'a']++;
         }
 
-        StringBuffer sb = new StringBuffer();
+        // 统计字母是否以及被访问
+        boolean[] visited = new boolean[26];
+        // 结果构建
+        StringBuilder res = new StringBuilder();
+        // 遍历字符串 逐个压栈并且判断是否 i < i + 1, 如果否，则将 i 出栈并将 i + 1 入栈
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
-            if (!vis[ch - 'a']) {
-                while (sb.length() > 0 && sb.charAt(sb.length() - 1) > ch) {
-                    if (num[sb.charAt(sb.length() - 1) - 'a'] > 0) {
-                        vis[sb.charAt(sb.length() - 1) - 'a'] = false;
-                        sb.deleteCharAt(sb.length() - 1);
-                    } else {
-                        break;
-                    }
+            if (!visited[ch - 'a']) {
+                // 判断 res 是否 存在值  并且最后一个ch > 准备插入的ch
+                while (res.length() > 0 && res.charAt(res.length() - 1) > ch) {
+                    // 如果 res 中最后一个ch 的数量 > 0 则将该ch 出栈 并将该字母设置为 未访问。
+                    if (numBucket[res.charAt(res.length() - 1) - 'a'] > 0) {
+                        visited[res.charAt(res.length() - 1) - 'a'] = false;
+                        res.deleteCharAt(res.length() - 1);
+                    } else break;
                 }
-                vis[ch - 'a'] = true;
-                sb.append(ch);
+                // 将当前字母压栈
+                res.append(ch);
+                // 将当前字母设置为 已访问
+                visited[ch - 'a'] = true;
             }
-            num[ch - 'a'] -= 1;
+            // 将字母 数量减一
+            numBucket[ch - 'a']--;
         }
-        return sb.toString();
+        // 返回结果
+        return res.toString();
     }
 }
