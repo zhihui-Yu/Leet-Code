@@ -38,6 +38,7 @@ public class SquaresOfASortedArray {
     public int[] sortedSquares(int[] nums) {
         int len = nums.length;
         int[] res = new int[len];
+        // 有点类似双指针
         for (int pre = 0, end = len - 1, pos = len - 1; pos >= 0;) {
             int preNum = nums[pre] * nums[pre];
             int endNum = nums[end] * nums[end];
