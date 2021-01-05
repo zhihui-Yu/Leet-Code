@@ -52,6 +52,7 @@ import java.util.Arrays;
 public class SortIntegersByTheNumberOfOneBits {
     public int[] sortByBits(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
+            // 可以自己通过 oneCount += arr[i] & 1; arr[i] >> 1; 来实现获取1的数量
             arr[i] += Integer.bitCount(arr[i]) * 1000000;
         }
         Arrays.sort(arr);
