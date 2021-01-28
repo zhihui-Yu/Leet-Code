@@ -37,7 +37,8 @@ package easy;
  */
 public class DecodeXoredArray {
     public int[] decode(int[] encoded, int first) {
-        // a^b = c ， a^b^b = a， 即 c^b=a 同理 c^a =b
+        // a ^ b = c, a ^ c = b, b ^ c = a;
+        // 7 ^ 3 = 4, 7 ^ 4 = 3, 3 ^ 4 = 7
         int[] res = new int[encoded.length+1];
         res[0] = first;
         int index = 1;
