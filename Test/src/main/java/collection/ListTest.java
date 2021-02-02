@@ -10,9 +10,9 @@ import java.util.List;
 public class ListTest {
     public static void main(String[] args) {
         //to sum up, when size is lower than 100000, array list is fast. when the size is over 100k, the linked list will be good.
-        int size = 1;
-        testArrayList(size);
+        int size = 10000000;
         testLinkList(size);
+        testArrayList(size);
     }
 
     private static void testArrayList(int size) {
