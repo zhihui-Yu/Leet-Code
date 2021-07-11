@@ -32,5 +32,9 @@ public class ShuZuZhongZhongFuDeShuZiLcof {
             if (!set.add(i)) return i;
         }
         return -1;
+
+        // 思路二： 原地置换
+        // 前置条件： 必须从0开始往后找i!=num[i]的。
+        // 将所有数字与下标对应， 如果在进行置换时发现 -> num[i] = num[num[i]] 则return num[i]
     }
 }
