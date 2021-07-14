@@ -34,7 +34,20 @@ public class ShuZuZhongChuXianCiShuChaoGuoYiBanDeShuZiLcof {
         return 0;
     }
 
+    // 投票法 -- Boyer-Moore 投票算法 空间复杂度O(1)
+    public int majorityElement2(int[] nums) {
+        int count = 0;
+        int res = nums[0];
+        for (int num : nums) {
+            if (count == 0) res = num;
+            count += res == num ? 1 : -1;
+        }
+
+        // 可用计数法 校验
+        return res;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new ShuZuZhongChuXianCiShuChaoGuoYiBanDeShuZiLcof().majorityElement(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
+        System.out.println(new ShuZuZhongChuXianCiShuChaoGuoYiBanDeShuZiLcof().majorityElement2(new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2}));
     }
 }
