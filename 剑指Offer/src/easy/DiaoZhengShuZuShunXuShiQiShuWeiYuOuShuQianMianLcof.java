@@ -35,6 +35,8 @@ public class DiaoZhengShuZuShunXuShiQiShuWeiYuOuShuQianMianLcof {
             }
             evenPos++;
         }
+        //可能是申明的局部遍历回收了, 内存消耗就低了
+        System.gc();
         return nums;
     }
 
