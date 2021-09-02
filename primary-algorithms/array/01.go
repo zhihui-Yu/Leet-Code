@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+/**
+  原地删除数组中的重复项 link:https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
+*/
 func main() {
 	res := removeDuplicates([]int{1, 1, 2, 3})
 	res2 := removeDuplicates([]int{})
