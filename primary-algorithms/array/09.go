@@ -14,8 +14,8 @@ func twoSum(nums []int, target int) []int {
 	l := len(nums)
 	numMap := make(map[int]int, l)
 	for i := 0; i < l; i++ {
-		if _, ok := numMap[target-nums[i]]; ok {
-			return []int{i, numMap[target-nums[i]]}
+		if v, ok := numMap[target-nums[i]]; ok {
+			return []int{i, v}
 		}
 		numMap[nums[i]] = i
 	}
