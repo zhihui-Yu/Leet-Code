@@ -35,7 +35,7 @@ public class JianShengZiLcof {
         int y = n / 3;
         if (x == 0) return (int) Math.pow(3, y);
         if (x == 1) return (int) (Math.pow(3, (y) - 1) * 4);
-        return (int) (Math.pow(3, y * 2));
+        return (int) (Math.pow(3, y) * 2);
     }
 
     public static void main(String[] args) {
