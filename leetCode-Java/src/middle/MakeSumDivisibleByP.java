@@ -51,7 +51,7 @@ import java.util.Map;
  */
 public class MakeSumDivisibleByP {
     // 前缀和：计算出每个数组的前缀和，然后计算哪两个最近的数字之差等于 sum(nums) % p，两数下标既为结果
-    public int minSubarray(int[] nums, int p) {
+    public int minSubarray2(int[] nums, int p) {
         int k = 0; // = sum(nums) % p
         for (int x : nums) {
             k = (k + x) % p;
@@ -69,12 +69,42 @@ public class MakeSumDivisibleByP {
             cur = (cur + nums[i]) % p;  // sum(nums[0..i]) mod p
             // 想要 (p-[k-cur]-target) % p == 0, 需要知道target的下标
             int target = (cur - k + p) % p; // cur - k <= p, 所以 + p； 如果 (x-y) mod p = 0, 则 x mod p = y
-             if (last.containsKey(target)) {
+            if (last.containsKey(target)) {
                 ans = Math.min(ans, i - last.get(target)); // i - last.get(target): 当前坐标 - target 坐标
             }
             last.put(cur, i);
         }
         return ans == n ? -1 : ans;
+    }
+
+    public int minSubarray(int[] nums, int p) {
+        int len = nums.length;
+
+        nums[0] = nums[0] % p;
+        for (int i = 1; i < len; i++) {
+            nums[i] = (nums[i] + nums[i - 1]) % p;
+        }
+
+        int k = nums[len - 1];
+        if (k == 0) return 0;
+
+        // 假设 k=10, num[i]=20, p = 25, (num[i]-k+p)%p意思是我有20在手，但是整体上我多了10个，所以要num[i]-k，
+        // 但是我要知道哪个子数组是15个[(num[i]-k)%p]，这样 子数组最右下标x， num[i]-num[x] = 10
+        // 如果num[i]=k,则说明0...i全删除即可
+        // 如果num[i]<k, 说明我手上有不够扣，需要目标子数组多扣一些则 num[i]-k+p
+        // num[i]>k时，+p不会影响，因为会被mod
+        Map<Integer, Integer> indexMap = new HashMap<>();
+        indexMap.put(0, -1); // 如果nums[i] = k；则说明 0..i 全部移除则成立
+        int res = len;
+        for (int i = 0; i < len; i++) {
+            var x = (nums[i] - k + p) % p;
+            var index = indexMap.get(x);
+            if (index != null) {
+                res = Math.min(res, i - index);
+            }
+            indexMap.put(nums[i], i);
+        }
+        return len == res ? -1 : res;
     }
 
     // 超时
@@ -98,9 +128,11 @@ public class MakeSumDivisibleByP {
     }
 
     public static void main(String[] args) {
+        System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{8, 32, 31, 18, 34, 20, 21, 13, 1, 27, 23, 22, 11, 15, 30, 4, 2}, 148)); // 7
         System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{6, 3, 5, 2}, 9)); // 2
-        System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{3 , 1, 4, 2}, 6)); // 1
+        System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{3, 1, 4, 2}, 6)); // 1
         System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{1, 2, 3}, 3)); // 0
         System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{1, 2, 3}, 7)); // -1
+        System.out.println(new MakeSumDivisibleByP().minSubarray(new int[]{1000000000, 1000000000, 1000000000}, 3)); // 0
     }
 }
