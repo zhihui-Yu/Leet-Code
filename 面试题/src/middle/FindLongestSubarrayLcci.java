@@ -50,13 +50,14 @@ public class FindLongestSubarrayLcci {
             Integer index = map.get(arr[i]);
             if (index != null) {
                 int tmp = Math.max(ansLen, i - index);
-                ansIndex = tmp == ansLen ? ansIndex : index;
+                ansIndex = tmp == ansLen ? ansIndex : index + 1;
                 ansLen = tmp;
             } else {
                 map.put(arr[i], i);
             }
         }
-        return Arrays.copyOfRange(array, ansIndex + 1, ansIndex + ansLen + 1);
+        // 比如 1,0,1， 当遍历最后一个1时，截取的数组应该是0,1, ansIndex = 1， len = 2
+        return Arrays.copyOfRange(array, ansIndex, ansIndex + ansLen);
     }
 
     public static void main(String[] args) {
