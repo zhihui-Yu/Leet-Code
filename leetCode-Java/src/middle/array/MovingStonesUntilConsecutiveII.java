@@ -64,7 +64,7 @@ public class MovingStonesUntilConsecutiveII {
         for (int left = 0, right = 0; right < n; right++) { // 滑动窗口，固定长度遍历
             while (stones[right] - stones[left] + 1 > n) left++; // 保持窗口长度不超过n
             if (right - left + 1 == n - 1 && stones[right] - stones[left] + 1 == n - 1) { // 第一个判断是已存在的石子==只有一个石子不连续， 第二个是已占用位置==总位置-1
-                min = Math.min(2, min);  // 特殊情况：只有一个石子不连续
+                min = Math.min(2, min);  // 特殊情况：只有一个石子不连续且空格大于1, 虽然[2, 3, 4, 5, 6, 8]会命中, 但是会在else中被判断为1
             } else {
                 min = Math.min(min, n - (right - left + 1)); // 总石子数 - 窗口内的石子数 = 空格数，既需要移动的次数
             }
@@ -73,7 +73,7 @@ public class MovingStonesUntilConsecutiveII {
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new MovingStonesUntilConsecutiveII().numMovesStonesII(new int[]{2, 3, 4, 5, 6, 8})));
+        System.out.println(Arrays.toString(new MovingStonesUntilConsecutiveII().numMovesStonesII(new int[]{1,2, 3, 4, 5, 6, 8})));
         System.out.println(Arrays.toString(new MovingStonesUntilConsecutiveII().numMovesStonesII(new int[]{7, 4, 9})));
     }
 }
