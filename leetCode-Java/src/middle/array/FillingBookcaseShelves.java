@@ -1,5 +1,7 @@
 package middle.array;
 
+import java.util.Arrays;
+
 /**
  * 1105. 填充书架
  * 给定一个数组 books ，其中 books[i] = [thickness-i, height-i] 表示第 i 本书的厚度和高度。你也会得到一个整数 shelfWidth 。
@@ -38,6 +40,24 @@ package middle.array;
  */
 public class FillingBookcaseShelves {
     public int minHeightShelves(int[][] books, int shelfWidth) {
+        int n = books.length;
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, 1000 * 1000 + 1);
+        dp[0] = 0;
 
+        for (int i = 0; i < n; i++) {
+            int width = 0, high = 0;
+            for (int j = i; j >= 0; j--) {
+                width += books[j][0];
+                if (width > shelfWidth) break;
+                high = Math.max(high, books[j][1]);
+                dp[i + 1] = Math.min(dp[i + 1], dp[j] + high);
+            }
+        }
+        return dp[n];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new FillingBookcaseShelves().minHeightShelves(new int[][]{{1, 1}, {2, 3}, {2, 3}, {1, 1}, {1, 1}, {1, 1}, {1, 2}}, 4));
     }
 }
