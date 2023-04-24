@@ -58,6 +58,7 @@ public class FillingBookcaseShelves {
     }
 
     public static void main(String[] args) {
+        System.out.println(new FillingBookcaseShelves().minHeightShelves(new int[][]{{2, 2}, {2, 2}, {3, 2}, {2, 2}, {1, 1}}, 5)); // 按顺序摆放： 所以是5
         System.out.println(new FillingBookcaseShelves().minHeightShelves(new int[][]{{1, 1}, {2, 3}, {2, 3}, {1, 1}, {1, 1}, {1, 1}, {1, 2}}, 4));
     }
 }
