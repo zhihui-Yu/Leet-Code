@@ -1,5 +1,7 @@
 package middle.array;
 
+import middle.string.ReorganizeString;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +28,8 @@ import java.util.Map;
  * <p>
  * 1 <= barcodes.length <= 10000
  * 1 <= barcodes[i] <= 10000
- *
+ * 相同题：
+ *   {@link ReorganizeString }
  * @author simple
  */
 public class DistantBarcodes {
@@ -49,13 +52,17 @@ public class DistantBarcodes {
             Integer num = entry.getKey();
             Integer cnt = entry.getValue();
 
-            while (cnt > 0 && cnt <= halfLen && odd < n) { // 元素数量小于或者等于数组一半时，可奇可偶，为了区分，所以奇数
+            // 元素数量小于或者等于数组一半时，可奇可偶
+            // 两种情况放奇数位，1：cnt本来就小于N/2; 2: cnt由于放在偶数位满了，溢出的放到奇数位
+            while (cnt > 0 && cnt <= halfLen && odd < n) {
                 cnt--;
                 ans[odd] = num;
                 odd += 2;
             }
 
-            while (cnt > 0) { // 元素数量大于数组一半时，必须放在偶数下标。 最多有且只有一个元素会超过数组一半
+            // 元素数量大于数组一半时，必须放在偶数下标。 最多有且只有一个元素会超过数组一半。 也有可能是奇数位满了就都放偶数位
+            // 由于是顺序存放，必然不会出现奇数位满了，放偶数位导致相邻数一样的情况！！
+            while (cnt > 0) {
                 cnt--;
                 ans[even] = num;
                 even += 2;
