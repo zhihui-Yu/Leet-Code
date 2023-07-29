@@ -1,4 +1,4 @@
-package easy.link;
+package easy.math;
 
 /**
  * 258. 各位相加
