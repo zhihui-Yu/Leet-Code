@@ -1,7 +1,4 @@
-package easy;
-
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
+package easy.math;
 
 /**
  * @author simple
@@ -36,5 +33,21 @@ public class SubtractProductAndSumOfDigitsOfInteger {
             count += integer;
         }
         return sub - count;
+    }
+
+    public int subtractProductAndSum_2(int n) {
+        int x, sum = 0, sub = 1;
+        while (n > 0) {
+            x = n % 10;
+            n = n / 10;
+            sum += x;
+            sub *= x;
+        }
+
+        return sub - sum;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new SubtractProductAndSumOfDigitsOfInteger().subtractProductAndSum_2(705));
     }
 }
