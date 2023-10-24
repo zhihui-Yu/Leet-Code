@@ -47,7 +47,7 @@ public class CategorizeBoxAccordingToCriteria {
         if (length >= 10_000
             || width >= 10_000
             || height >= 10_000
-            || length * width * height >= 1_000_000_000) {
+            || (long) length * width * height >= 1_000_000_000L) {
             bulky = true;
         }
         if (mass >= 100) heavy = true;
@@ -59,7 +59,8 @@ public class CategorizeBoxAccordingToCriteria {
     }
 
     public static void main(String[] args) {
-        System.out.println(new CategorizeBoxAccordingToCriteria().categorizeBox(1000, 35, 700, 300));
-        System.out.println(new CategorizeBoxAccordingToCriteria().categorizeBox(200, 50, 800, 50));
+//        System.out.println(new CategorizeBoxAccordingToCriteria().categorizeBox(1000, 35, 700, 300));
+//        System.out.println(new CategorizeBoxAccordingToCriteria().categorizeBox(200, 50, 800, 50));
+        System.out.println(new CategorizeBoxAccordingToCriteria().categorizeBox(2909, 3968, 3272, 727));
     }
 }
