@@ -63,6 +63,23 @@ public class FindTheKOrOfAnArray {
         return sum;
     }
 
+    // 官方解答
+    public int findKOr_official(int[] nums, int k) {
+        int ans = 0;
+        for (int i = 0; i < 31; ++i) {
+            int cnt = 0;
+            for (int num : nums) {
+                if (((num >> i) & 1) != 0) {
+                    ++cnt;
+                }
+            }
+            if (cnt >= k) {
+                ans |= 1 << i;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         // 9
         System.out.println(new FindTheKOrOfAnArray().findKOr(new int[]{7, 12, 9, 8, 9, 15}, 4));
