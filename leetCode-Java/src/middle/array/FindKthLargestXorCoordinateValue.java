@@ -54,10 +54,8 @@ public class FindKthLargestXorCoordinateValue {
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= col; j++) {
                 /**
-                 * pre[i-1][j-1] 表示到达矩阵的 (i-1, j-1) 位置，
-                 * 但不包括从 (0, 0) 到 (i-1, j-1) 的所有元素的异或和。
-                 *
-                 * 这个值需要被加回来，因为我们在计算 pre[i-1][j] 和 pre[i][j-1] 时，(i-1, j-1) 这个位置被异或了两次，而我们需要它只异或一次。
+                 * 前缀和 包含matrix[i - 1][j - 1] 的原因：
+                 * i,j 从 1 开始算， matrix[i][j]的前缀和包含 matrix[i][j]
                  */
                 pre[i][j] = pre[i][j - 1] ^ pre[i - 1][j] ^ pre[i - 1][j - 1] ^ matrix[i - 1][j - 1];
                 result.add(pre[i][j]);
